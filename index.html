@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="jquery.js"></script>
+  <script src="script.js"></script>
+  <style>
+  .form{
+    margin-left:40%
+
+  }
+  </style>
+</head>
+
+<body>
+  <div id="search-page">
+    <form class='form'>
+      <h1>Movie Search</h1>
+      <input id="search-field" type="text" name="s">
+      <button>Search</button>
+    </form>
+    <div id="results" class="">
+    </div>
+    <button class="more">More</button>
+  </div>
+
+  <div id="details-page">
+    <a id="go-back" href="">Return to Search Page</a>
+    <p><label>Title: </label><span class="title"></span></p>
+    <p><label>Actors: </label><span class="actors"></span></p>
+    <p><label>Plot: </label><span class="plot"></span></p>
+    <p><label>Release Year: </label><span class="year"></span></p>
+    <p><label>Rating: </label><span class="rating"></span></p>
+    <p><label>Genre: </label><span class="genre"></span></p>
+    <div class="posterimg"></div>
+  </div>
+
+</body>
+</html>
