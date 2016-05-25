@@ -88,69 +88,7 @@ $(function () {
     page = 1;
     //give the results a blank screen
     $('#results').html('');
-    //gets the userinput
-    //var userInput = $('#search-field').val();
-    //uses ajax to return userinput data via the search
-    // $.ajax({
-    //   url: 'http://www.omdbapi.com/',
-    //   data: {
-    //     s: userInput,
-    //     page: page
-    //   },
-    //   success: function(data) {
-    //     console.log('Returned data', data);
-    //     var results = data.Search;
-    //     //loops through data search array
-    //     for (var i = 0; i < results.length; i++){
-    //       //adds link with a displayed img poster
-    //       var a = $('<a>')
-    //       .attr('href','http://www.imdb.com/title/' + results[i].imdbID).data('imdbId', results[i].imdbID);
-    //       var img = $('<img>')
-    //       .attr('src', results[i].Poster)
-    //       .attr('alt', results[i].Title);
-    //       a.append(img);
-    //       //adds link and images to html
-    //       $('#results').append(a);
-    //     }
-    //     page++;
         search();
 
-        //check if num of pages is less than results
-        // if (page < Math.ceil((data.totalResults / 10))) {
-        //   //show more button
-        //   $('.more').show();
-        //   var userInput = $('#search-field').val();
-        //   $('.more').click(function() {
-        //     $.ajax({
-        //       url: 'http://www.omdbapi.com/',
-        //       data: {
-        //         s: userInput,
-        //         page: page
-        //       },
-        //       success: function(data) {
-        //         console.log('Returned data', data);
-        //         var results = data.Search;
-        //         //loops through data search array
-        //         for (var i = 0; i < results.length; i++){
-        //           //adds link with a displayed img poster
-        //           var a = $('<a>')
-        //           .attr('href','http://www.imdb.com/title/' + results[i].imdbID);
-        //           var img = $('<img>')
-        //           .attr('src', results[i].Poster)
-        //           .attr('alt', results[i].Title);
-        //           a.append(img);
-        //           //adds link and images to html
-        //           $('#results').append(a);
-        //         }
-        //       }
-        //     })
-        //     page++;
-        //     if (page === Math.ceil((data.totalResults / 10))) {
-        //       $('.more').hide();
-        //     }
-        //   })
-        // }
-      //}
-    //});
   });
 });
