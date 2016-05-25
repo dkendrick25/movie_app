@@ -1,4 +1,10 @@
 var page = 1;
+//extract duplicated ajax into a function
+function search() {
+
+}
+
+
 $(function () {
   //hide detail page
   $('#details-page').hide();
