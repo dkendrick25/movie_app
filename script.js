@@ -1,7 +1,37 @@
 var page = 1;
 //extract duplicated ajax into a function
 function search() {
-
+  var userInput = $('#search-field').val();
+  $.ajax({
+    url: 'http://www.omdbapi.com/',
+    data: {
+      s: userInput,
+      page: page
+    },
+    success: function(data) {
+      var total = Number(data.totalResults);
+      if (total > page * 10) {
+        $('.more').show();
+      } else {
+        $('.more').hide();
+      }
+      page++;
+      console.log('Returned data', data);
+      var results = data.Search;
+      //loops through data search array
+      for (var i = 0; i < results.length; i++){
+        //adds link with a displayed img poster
+        var a = $('<a>')
+        .attr('href','http://www.imdb.com/title/' + results[i].imdbID).data('imdbId', results[i].imdbID);
+        var img = $('<img>')
+        .attr('src', results[i].Poster)
+        .attr('alt', results[i].Title);
+        a.append(img);
+        //adds link and images to html
+        $('#results').append(a);
+      }
+    }
+  });
 }
 
 
@@ -10,6 +40,9 @@ $(function () {
   $('#details-page').hide();
   //initially hide the more button
   $('.more').hide();
+  $('.more').click(function(event) {
+    search();
+  });
   //when clicking on a image with a link
   /* disable going to a new link when anchor is clicked */
   $('#results').on('click', 'a', function(event) {
@@ -56,71 +89,68 @@ $(function () {
     //give the results a blank screen
     $('#results').html('');
     //gets the userinput
-    var userInput = $('#search-field').val();
+    //var userInput = $('#search-field').val();
     //uses ajax to return userinput data via the search
-    $.ajax({
-      url: 'http://www.omdbapi.com/',
-      data: {
-        s: userInput,
-        page: page
-      },
-      success: function(data) {
-        console.log('Returned data', data);
-        var results = data.Search;
-        //loops through data search array
-        for (var i = 0; i < results.length; i++){
-          //adds link with a displayed img poster
-          var a = $('<a>')
-          .attr('href','http://www.imdb.com/title/' + results[i].imdbID).data('imdbId', results[i].imdbID);
-          var img = $('<img>')
-          .attr('src', results[i].Poster)
-          .attr('alt', results[i].Title);
-          a.append(img);
-          //adds link and images to html
-          $('#results').append(a);
-
-
-
-
-        }
-        page++;
+    // $.ajax({
+    //   url: 'http://www.omdbapi.com/',
+    //   data: {
+    //     s: userInput,
+    //     page: page
+    //   },
+    //   success: function(data) {
+    //     console.log('Returned data', data);
+    //     var results = data.Search;
+    //     //loops through data search array
+    //     for (var i = 0; i < results.length; i++){
+    //       //adds link with a displayed img poster
+    //       var a = $('<a>')
+    //       .attr('href','http://www.imdb.com/title/' + results[i].imdbID).data('imdbId', results[i].imdbID);
+    //       var img = $('<img>')
+    //       .attr('src', results[i].Poster)
+    //       .attr('alt', results[i].Title);
+    //       a.append(img);
+    //       //adds link and images to html
+    //       $('#results').append(a);
+    //     }
+    //     page++;
+        search();
 
         //check if num of pages is less than results
-        if (page < Math.ceil((data.totalResults / 10))) {
-          //show more button
-          $('.more').show();
-          var userInput = $('#search-field').val();
-          $('.more').click(function() {
-            $.ajax({
-              url: 'http://www.omdbapi.com/',
-              data: {
-                s: userInput,
-                page: page
-              },
-              success: function(data) {
-                console.log('Returned data', data);
-                var results = data.Search;
-                //loops through data search array
-                for (var i = 0; i < results.length; i++){
-                  //adds link with a displayed img poster
-                  var a = $('<a>')
-                  .attr('href','http://www.imdb.com/title/' + results[i].imdbID);
-                  var img = $('<img>')
-                  .attr('src', results[i].Poster)
-                  .attr('alt', results[i].Title);
-                  a.append(img);
-                  //adds link and images to html
-                  $('#results').append(a);
-                }
-              }
-            })
-            page++;
-            if (page === Math.ceil((data.totalResults / 10))) {
-              $('.more').hide();
-            }
-          })
-        }
-      }
-    });
+        // if (page < Math.ceil((data.totalResults / 10))) {
+        //   //show more button
+        //   $('.more').show();
+        //   var userInput = $('#search-field').val();
+        //   $('.more').click(function() {
+        //     $.ajax({
+        //       url: 'http://www.omdbapi.com/',
+        //       data: {
+        //         s: userInput,
+        //         page: page
+        //       },
+        //       success: function(data) {
+        //         console.log('Returned data', data);
+        //         var results = data.Search;
+        //         //loops through data search array
+        //         for (var i = 0; i < results.length; i++){
+        //           //adds link with a displayed img poster
+        //           var a = $('<a>')
+        //           .attr('href','http://www.imdb.com/title/' + results[i].imdbID);
+        //           var img = $('<img>')
+        //           .attr('src', results[i].Poster)
+        //           .attr('alt', results[i].Title);
+        //           a.append(img);
+        //           //adds link and images to html
+        //           $('#results').append(a);
+        //         }
+        //       }
+        //     })
+        //     page++;
+        //     if (page === Math.ceil((data.totalResults / 10))) {
+        //       $('.more').hide();
+        //     }
+        //   })
+        // }
+      //}
+    //});
   });
 });
