@@ -14,4 +14,5 @@ Want to find information for a particular movie? Type the movie title in the sea
 
 
 ##URL to Live Project
+* Poster images are no longer working due to API
 [check it out here](http://kendrickmovieapp.surge.sh/)
